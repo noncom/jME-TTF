@@ -1,20 +1,20 @@
-MaterialDef blurFinal {
+MaterialDef VGaussianBlur {
 
     MaterialParameters {
         Texture2D Texture
-        Color Color (Color)
+        Float Size
+        Float Scale
     }
 
     Technique {
-        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
-        FragmentShader GLSL100: Common/MatDefs/TTF/Blur/blurFinal.frag
+        VertexShader GLSL100 GLSL150:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL100 GLSL150: Common/MatDefs/TTF/Blur/VGaussianBlur.frag
 
         WorldParameters {
             WorldViewProjectionMatrix
         }
         
         RenderState {
-            Blend Alpha
             DepthTest Off
             DepthWrite Off
         }

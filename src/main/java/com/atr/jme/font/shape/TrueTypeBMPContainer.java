@@ -27,6 +27,8 @@ import com.jme3.scene.VertexBuffer;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An implementation of {@link TrueTypeContainer} used for
@@ -46,7 +48,14 @@ public class TrueTypeBMPContainer extends TrueTypeContainer {
     public void updateGeometry() {
         ((BMPMesh)((Geometry)getChild(0)).getMesh()).updateMesh();
     }
-    
+
+    @Override
+    public List<Geometry> getGeometries() {
+        List<Geometry> geometries = new ArrayList<>();
+        geometries.add((Geometry)getChild(0));
+        return geometries;
+    }
+
     /**
      * The actual mesh that the text is rendered with.
      * 

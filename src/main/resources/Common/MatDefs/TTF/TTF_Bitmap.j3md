@@ -2,15 +2,20 @@ MaterialDef TrueTypeFont {
     MaterialParameters {
         Texture2D Texture
         Color Color (Color)
+        Boolean VertexColor (UseVertexColor)
     }
     Technique {
-        VertexShader GLSL100 GLSL150: Common/MatDefs/TTF/TTF_Bitmap.vert
-        FragmentShader GLSL100 GLSL150: Common/MatDefs/TTF/TTF_Bitmap.frag
+        VertexShader GLSL100: Common/MatDefs/TTF/TTF_Bitmap.vert
+        FragmentShader GLSL100: Common/MatDefs/TTF/TTF_Bitmap.frag
         
         WorldParameters {
             WorldViewProjectionMatrix
         }
-        
+
+        Defines {
+            HAS_VERTEXCOLOR : VertexColor
+        }
+
         RenderState {
             Blend Alpha
         }

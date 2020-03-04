@@ -16,7 +16,10 @@ package com.atr.jme.font.shape;
 
 import com.atr.jme.font.util.StringContainer;
 import com.jme3.material.Material;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+
+import java.util.List;
 
 /**
  * A <code>Node</code> that builds a <code>Mesh</code> to display
@@ -163,4 +166,6 @@ public abstract class TrueTypeContainer extends Node {
      * <code>TrueTypeContainer</code> have been changed.
      */
     public abstract void updateGeometry();
+
+    public abstract List<Geometry> getGeometries();
 }

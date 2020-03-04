@@ -1,5 +1,3 @@
-#import "Common/ShaderLib/GLSLCompat.glsllib"
-
 #ifdef USEAA
     #ifdef GL_ES
         #extension GL_OES_standard_derivatives:enable
@@ -19,6 +17,8 @@ uniform vec4 m_Color;
 
 varying vec2 texCoord;
 varying vec2 texCoord2;
+
+varying vec4 vertColor;
 
 #ifdef USEAA
     float AA(in float x, in float add) {
@@ -40,11 +40,17 @@ void main() {
     #else
         float alpha = (step(0.0, c) * s) + (1.0 * (1.0 - s));
     #endif
-    
+
+    vec4 color = vec4(m_Color.rgb, alpha * m_Color.a);
+
+    #ifdef HAS_VERTEXCOLOR
+        color *= vertColor;
+    #endif
+
     if (alpha <= 0.001) {
         discard;
     } else {
-        gl_FragColor = vec4(m_Color.rgb, alpha * m_Color.a); 
+        gl_FragColor = color;
     }
 }
 

@@ -1,22 +1,19 @@
-MaterialDef blurFinal {
-
+MaterialDef TrueTypeOutlined {
     MaterialParameters {
         Texture2D Texture
         Color Color (Color)
+        Color Outline (Color)
     }
-
     Technique {
-        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
-        FragmentShader GLSL100: Common/MatDefs/TTF/Blur/blurFinal.frag
-
+        VertexShader GLSL100 GLSL150: Common/MatDefs/TTF/TTF_Bitmap.vert
+        FragmentShader GLSL100 GLSL150: Common/MatDefs/TTF/TTF_BitmapOutlined.frag
+        
         WorldParameters {
             WorldViewProjectionMatrix
         }
         
         RenderState {
             Blend Alpha
-            DepthTest Off
-            DepthWrite Off
         }
     }
 }

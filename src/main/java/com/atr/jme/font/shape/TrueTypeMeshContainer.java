@@ -23,11 +23,15 @@ import com.jme3.material.Material;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.VertexBuffer;
 import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An implementation of {@link TrueTypeContainer} used for
@@ -117,7 +121,19 @@ public class TrueTypeMeshContainer extends TrueTypeContainer {
             attachChild(g);
         }
     }
-    
+
+    @Override
+    public List<Geometry> getGeometries() {
+        // updateGeometry() ensures it's going to be the right geometry
+        List<Geometry> geometries = new ArrayList<>();
+        for(Spatial child : getChildren()) {
+            if(child instanceof Geometry) {
+                geometries.add((Geometry)child);
+            }
+        }
+        return geometries;
+    }
+
     /**
      * A helper class that tracks information necessary to determine where in the
      * text each {@link TextMesh} should start and end.
